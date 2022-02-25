@@ -1,13 +1,20 @@
 import { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton';
-import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router'
 import { Link } from 'react-router-dom'
 import 'react-loading-skeleton/dist/skeleton.css'
+import { useDispatch } from 'react-redux';
+import { addCart } from '../redux/action';
 
 export default function Product() {
     const { id } = useParams()
     const [product, setProduct] = useState([])
     const [loading, setLoading] = useState(false)
+
+    const dispatch = useDispatch()
+    const addProduct = (product) => {
+        dispatch(addCart(product))
+    }
 
     useEffect(() => {
         const getProduct = async () => {
@@ -31,10 +38,10 @@ export default function Product() {
                     <Skeleton height={25} width={300}/>
                     <Skeleton height={50} />
                     <Skeleton height={150} />  
-                    <div class="row">
-                        <div class="col-2">
+                    <div className="row">
+                        <div className="col-2">
                             <Skeleton height={50} width={100} />                            </div>
-                        <div class="col-10">
+                        <div className="col-10">
                             <Skeleton height={50} width={100}  />
                             </div>
                         </div>
@@ -64,7 +71,7 @@ export default function Product() {
                 <p className="lead">
                     {product.description}
                 </p>
-                <button className="btn btn-outline-dark px-4 py-2">
+                <button className="btn btn-outline-dark px-4 py-2" onClick={()=>addProduct(product)}>
                     Add to cart
                 </button>
                 <Link to='/cart' className="btn btn-outline-dark ms-2 px-3 py-2">
