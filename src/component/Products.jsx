@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton';
+import { Link } from 'react-router-dom';
+import 'react-loading-skeleton/dist/skeleton.css'
 
 export default function Products() {
     const [data, setData] = useState([])
@@ -69,7 +71,7 @@ export default function Products() {
                                         <p className="card-text lead fw-bold">
                                             ${product.price}
                                         </p>
-                                        <a href={product.image} className="btn btn-outline-dark">Buy now</a>
+                                        <Link to={`/products/${product.id}`} className="btn btn-outline-dark">Buy now</Link>
                                     </div>
                                 </div>
                             </div>
